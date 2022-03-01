@@ -31,6 +31,8 @@ jobs:
       run: | # login to ecr
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 833945302705.dkr.ecr.us-east-1.amazonaws.com
 
-    - name: docker push to ecr
-    - run: docker tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} 833945302705.dkr.ecr.us-east-1.amazonaws.com/githubactions:${{ steps.date.outputs.date }}
-    - run:  docker push 833945302705.dkr.ecr.us-east-1.amazonaws.com/githubactions:${{ steps.date.outputs.date }}
+    - name: docker tag to ecr
+      run: docker tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} 833945302705.dkr.ecr.us-east-1.amazonaws.com/githubactions:${{ steps.date.outputs.date }}
+
+    - name: docker push to ECR
+      run: docker push 833945302705.dkr.ecr.us-east-1.amazonaws.com/githubactions:${{ steps.date.outputs.date }}
